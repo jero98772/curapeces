@@ -4,16 +4,16 @@ import argparse
 import numpy as np
 import math
 import urllib
-seccion = raw_input ()
+seccion = input ()
 if seccion == "camara":
     print ("usted escogio camara")
-    seleccion = raw_input()
+    seleccion = input()
     if seleccion== "prueba":
         captura = cv2.VideoCapture(0)
         while (True):
-		ret,frame = captura.read()
-		cv2.imshow("video",frame)
-		if(cv2.waitKey(1) & 0xff == ord("q")):
+		          ret,frame = captura.read()
+		          cv2.imshow("video",frame)
+		          if(cv2.waitKey(1) & 0xff == ord("q")):
 			             break
         captura.relase()
         cv2.destroyAllWindos()
@@ -73,7 +73,7 @@ if seccion == "camara":
 
                             cv2.circle(frame, (int(x), int(y)), int(radius), colors[key], 2)
                             cv2.putText(frame,key + " punto", (int(x-radius),int(y-radius)), cv2.FONT_HERSHEY_SIMPLEX, 0.6,colors[key],2)
-                            print "este pez tiene ich"
+
 
 
                 cv2.imshow("Frame", frame)
@@ -92,10 +92,10 @@ if seccion == "camara":
         while(1):
 
             _, frame = cap.read()
-            hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HS
+            hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HS)
             lower_white = np.array([0,0,0], dtype=np.uint8)
-            upper_white = np.array([255,37,255], dtype=np.uint
-            mask = cv2.inRange(hsv, lower_white, upper_whit
+            upper_white = np.array([255,37,255], dtype=np.uint8)
+            mask = cv2.inRange(hsv, lower_white, upper_white)
             res = cv2.bitwise_and(frame,frame, mask= mask)
 
             cv2.imshow('frame',frame)
