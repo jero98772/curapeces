@@ -16,15 +16,16 @@ import math
 import urllib
 
 from flask import Flask
-app = Flask(__name__)
-@app.route('/')
-def index ():
- return 'hola mundo'
-app.run()
 
 
 
 seccion = input ()
+if seccion == "web":
+    app = Flask(__name__)
+    @app.route('/')
+    def index ():
+        return 'hola mundo'
+        app.run()
 if seccion == "camara":
     print ("usted escogio camara")
     seleccion = input()
