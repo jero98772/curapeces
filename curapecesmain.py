@@ -5,7 +5,7 @@
 #cv2.rectangle ( image, upper left corner vertex, lower right corner vertex, line thickness / fill type, line type)
 #cv2.putText ( image, text, starting point of text, font type, font scale, color, linetype )
 
-from flask import Flask 
+from flask import Flask
 import cv2
 import sys
 import argparse
@@ -134,6 +134,7 @@ if seccion == "camara":
 if seccion == "imagen":
         print ("usted escogio imagen")
         green = (0, 255, 0)
+            #este esun codigo de siraj raval con el cual estoy aprendiendo  gracias por su comprecion
 
         def show(image):
             # Figure size in inches
