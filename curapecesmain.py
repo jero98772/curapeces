@@ -5,7 +5,7 @@
 #cv2.rectangle ( image, upper left corner vertex, lower right corner vertex, line thickness / fill type, line type)
 #cv2.putText ( image, text, starting point of text, font type, font scale, color, linetype )
 
-
+#importamos las librerias de opencv, numpy ,flask ,etc
 import cv2
 import sys
 import argparse
@@ -17,24 +17,28 @@ import urllib
 
 from flask import Flask
 
-
-
+#declaramos la varible seccion como un input
 seccion = input ()
-if seccion == "web":
+#si es en la input escribimos web  sale hola mundo  de flask
+if seccion =="web":
     app = Flask(__name__)
     @app.route('/')
     def index ():
         return 'hola mundo'
-        app.run()
+    app.run()
+#si escribimos camara vamamos al menu del sugmenu de camara
 if seccion == "camara":
+#imprimimos usted escogio camara
     print ("usted escogio camara")
     seleccion = input()
+#otro input para seleccionar
     if seleccion== "prueba":
-        captura = cv2.VideoCapture(0)
+#declaramos la variable captura como video en vivo en colores
         while (True):
-		          ret,frame = captura.read()
-		          cv2.imshow("video",frame)
-		          if(cv2.waitKey(1) & 0xff == ord("q")):
+            captura = cv2.VideoCapture(0)
+            ret,frame = captura.read()
+            cv2.imshow("video",frame)
+            if(cv2.waitKey(1) & 0xff == ord("q")):
 			             break
         captura.relase()
         cv2.destroyAllWindos()
