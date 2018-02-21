@@ -5,7 +5,7 @@
 #cv2.rectangle ( image, upper left corner vertex, lower right corner vertex, line thickness / fill type, line type)
 #cv2.putText ( image, text, starting point of text, font type, font scale, color, linetype )
 
-from flask import Flask
+
 import cv2
 import sys
 import argparse
@@ -14,16 +14,26 @@ import numpy as np
 from math import cos, sin
 import math
 import urllib
-seccion = raw_input ()
+
+from flask import Flask
+app = Flask(__name__)
+@app.route('/')
+def index ():
+ return 'hola mundo'
+app.run()
+
+
+
+seccion = input ()
 if seccion == "camara":
     print ("usted escogio camara")
-    seleccion = raw_input()
+    seleccion = input()
     if seleccion== "prueba":
         captura = cv2.VideoCapture(0)
         while (True):
-		ret,frame = captura.read()
-		cv2.imshow("video",frame)
-		if(cv2.waitKey(1) & 0xff == ord("q")):
+		          ret,frame = captura.read()
+		          cv2.imshow("video",frame)
+		          if(cv2.waitKey(1) & 0xff == ord("q")):
 			             break
         captura.relase()
         cv2.destroyAllWindos()
@@ -80,7 +90,7 @@ if seccion == "camara":
 
                             cv2.circle(frame, (int(x), int(y)), int(radius), colors[key], 2)
                             cv2.putText(frame,key + " punto", (int(x-radius),int(y-radius)), cv2.FONT_HERSHEY_SIMPLEX, 0.6,colors[key],2)
-                            print "este pez tiene ich"
+
 
 
                 cv2.imshow("Frame", frame)
