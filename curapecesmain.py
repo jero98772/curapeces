@@ -24,25 +24,21 @@ seccion = input ()
 if seccion =="web":
     numero = input()
     if numero == "todo":
-
+        app = Flask(__name__, template_folder = 'teplates')
+        @app.route('/')
+        def index ():
+            return render_template('index.html', name =name)
+        if __name__=='__main__':
+            app.run(debug = False ,port= 8000)
+        pass
+    if numero == "inicio":
         app = Flask(__name__)
-
         @app.route('/')
         def index ():
             return render_template('index.html')
-    if __name__=='__main__':
+        if __name__=='__main__':
+            app.run(debug = False ,port= 8000)
 
-        app.run(debug = False,port= 8000)
-    if numero == "inicio":
-
-        app = Flask(__name__)
-
-        @app.route('/inicio')
-        def index ():
-            return render_template('index.html')
-    if __name__=='__main__':
-
-        app.run(debug = False,port= 8000)
 #si escribimos camara vamamos al menu del sugmenu de camara
 if seccion == "camara":
 #imprimimos usted escogio camara
