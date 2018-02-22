@@ -15,17 +15,34 @@ from math import cos, sin
 import math
 import urllib
 
+from flask import render_template
 from flask import Flask
 
 #declaramos la varible seccion como un input
 seccion = input ()
 #si es en la input escribimos web  sale hola mundo  de flask
 if seccion =="web":
-    app = Flask(__name__)
-    @app.route('/')
-    def index ():
-        return 'hola mundo'
-    app.run()
+    numero = input()
+    if numero == "todo":
+
+        app = Flask(__name__)
+
+        @app.route('/')
+        def index ():
+            return render_template('index.html')
+    if __name__=='__main__':
+
+        app.run(debug = False,port= 8000)
+    if numero == "inicio":
+
+        app = Flask(__name__)
+
+        @app.route('/inicio')
+        def index ():
+            return render_template('index.html')
+    if __name__=='__main__':
+
+        app.run(debug = False,port= 8000)
 #si escribimos camara vamamos al menu del sugmenu de camara
 if seccion == "camara":
 #imprimimos usted escogio camara
