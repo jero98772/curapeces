@@ -17,11 +17,12 @@ import urllib
 
 from flask import render_template
 from flask import Flask
-
+print("camara ;; web ;; imagen ")
 #declaramos la varible seccion como un input
 seccion = input ()
 #si es en la input escribimos web  sale hola mundo  de flask
 if seccion =="web":
+    print ("inicio ;; todo")
     numero = input()
     if numero == "todo":
         app = Flask(__name__, template_folder = 'teplates')
@@ -42,7 +43,8 @@ if seccion =="web":
 #si escribimos camara vamamos al menu del sugmenu de camara
 if seccion == "camara":
 #imprimimos usted escogio camara
-    print ("usted escogio camara")
+    print("usted escogio camara")
+    print ("menu ;; ich ;; prueba ;;ni idea")
     seleccion = input()
 #otro input para seleccionar
     if seleccion== "prueba":
