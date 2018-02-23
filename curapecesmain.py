@@ -161,7 +161,6 @@ if seccion == "camara":
                 cv2.destroyAllWindows()
 if seccion == "imagen":
         print ("usted escogio imagen")
-        green = (0, 255, 0)
             #este esun codigo de siraj raval con el cual estoy aprendiendo  gracias por su comprecion
 
         def show(image):
@@ -205,7 +204,7 @@ if seccion == "imagen":
             #easy function
             ellipse = cv2.fitEllipse(contour)
             #add it
-            cv2.ellipse(image_with_ellipse, ellipse, green, 2, cv2.CV_AA)
+            cv2.ellipse(image_with_ellipse, ellipse, 2, cv2.CV_AA)
             return image_with_ellipse
 
         def find_strawberry(image):
@@ -229,7 +228,7 @@ if seccion == "imagen":
             #we want to eliminate noise from our image. clean. smooth colors without
             #dots
             # Blurs an image using a Gaussian filter. input, kernel size, how much to filter, empty)
-            image_blur = cv2.GaussianBlur(image, (7, 7), 0)
+            image_blur = cv2.GaussianBlur(image, (9, 9), 0)
             #t unlike RGB, HSV separates luma, or the image intensity, from
             # chroma or the color information.
             #just want to focus on color, segmentation
@@ -238,15 +237,15 @@ if seccion == "imagen":
             # Filter by colour
             # 0-10 hue
             #minimum red amount, max red amount
-            min_red = np.array([0, 100, 80])
-            max_red = np.array([10, 256, 256])
+            min_red = np.array([255, 165, 0])
+            max_red = np.array([255, 140, 0])
             #layer
             mask1 = cv2.inRange(image_blur_hsv, min_red, max_red)
 
             #birghtness of a color is hue
             # 170-180 hue
-            min_red2 = np.array([170, 100, 80])
-            max_red2 = np.array([180, 256, 256])
+            min_red2 = np.array([255, 165, 0])
+            max_red2 = np.array([255, 140, 0])
             mask2 = cv2.inRange(image_blur_hsv, min_red2, max_red2)
 
             #looking for what is in both ranges
@@ -266,7 +265,7 @@ if seccion == "imagen":
 
             # Find biggest strawberry
             #get back list of segmented strawberries and an outline for the biggest one
-            big_strawberry_contour, mask_strawberries = find_biggest_contour(mask_clean)
+            big_strawberry_contour, mask_strawberries =(mask)
 
             # Overlay cleaned mask on image
             # overlay mask on image, strawberry now segmented
@@ -283,8 +282,8 @@ if seccion == "imagen":
             return bgr
 
         #read the image
-        image = cv2.imread('berry.jpg')
+        image = cv2.imread('fish.jpg')
         #detect it
         result = find_strawberry(image)
         #write the new image
-        cv2.imwrite('berry2.jpg', result)
+        cv2.imwrite('fish2.jpg', result)
