@@ -4,8 +4,10 @@
 #cv2.ellipse ( image, center, axes lengths, rotation degree of ellipse, starting angle , ending angle, color, line thickness / fill type, line type)
 #cv2.rectangle ( image, upper left corner vertex, lower right corner vertex, line thickness / fill type, line type)
 #cv2.putText ( image, text, starting point of text, font type, font scale, color, linetype )
-
+#PERDONA la orrografia grcias por la compremncion
 #importamos las librerias de opencv, numpy ,flask ,etc
+#lineas sin entender bien 
+#173
 import cv2
 import sys
 import argparse
@@ -55,6 +57,9 @@ if seccion == "camara":
             cv2.imshow("video",frame)
             if(cv2.waitKey(1) & 0xff == ord("q")):
 			             break
+
+#PERDONA la orrografia grcias por la comprencion
+                                 
         captura.relase()
         cv2.destroyAllWindos()
     if seleccion =="ich":
@@ -66,7 +71,7 @@ if seccion == "camara":
             args = vars(ap.parse_args())
             lower = {'ich':(0,0,0)}
             upper = {'ich':(255,60,255)}
-
+#PERDONA la orrografia grcias por la compremncion
             colors = {'ich':(0, 6, 100)}
 
 
@@ -128,19 +133,16 @@ if seccion == "camara":
         cap = cv2.VideoCapture(0)
         while(1):
 
-
+#PERDONA la orrografia grcias por la compremncion
 
 
 
                 #_, frame = cap.read()
                 #hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-                # define range of white color in HSV
-                # change it according to your need !
                 #lower_white = np.array([0,0,0], dtype=np.uint8)
                 #upper_white = np.array([255,37,255], dtype=np.uint8)
 
-                # Threshold the HSV image to get only white colors
                 #mask = cv2.inRange(hsv, lower_white, upper_white)
                 # Bitwise-AND mask and original image
                 #res = cv2.bitwise_and(frame,frame, mask= mask)
@@ -165,12 +167,10 @@ if seccion == "imagen":
         print ("usted escogio imagen")
             #este esun codigo de siraj raval con el cual estoy aprendiendo  gracias por su comprecion
 
-        def show(image):
-            # Figure size in inches
-            plt.figure(figsize=(10, 10))
+        
+            plt.figure(figsize=(10, 10))#la funcion figure pertenese a la clase plt con el parametro de figsise y 10 ,10 es un valor
 
-            # Show image, with nearest neighbour interpolation
-            plt.imshow(image, interpolation='nearest')
+            plt.imshow(image, interpolation='nearest')# la funcion imshow pertenese ala clase plt con los parametros de image y este que aprendindo ("interpolation='nearest'")
 
         def overlay_mask(mask, image):
         	#make the mask rgb
@@ -289,3 +289,4 @@ if seccion == "imagen":
         result = find_strawberry(image)
         #write the new image
         cv2.imwrite('fish2.jpg', result)
+#PERDONA la orrografia grcias por la compremncion
