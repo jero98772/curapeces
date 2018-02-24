@@ -7,7 +7,7 @@
 #PERDONA la orrografia grcias por la compremncion
 #importamos las librerias de opencv, numpy ,flask ,etc
 #lineas sin entender bien 
-#173
+#173 ;; que significa ;  en las las funciones
 import cv2
 import sys
 import argparse
@@ -177,18 +177,14 @@ if seccion == "imagen":
             img = cv2.addWeighted(rgb_mask, 0.5, image, 0.5, 0) #img es una vaib #le con el valor de la funcion addWeigthted de la clase cv2  con los parametros de
 # la varible rgb_mask con otros valores de  0.5 con imagen (todavia no dice si es
 # funcion o varible)
-            return img
+            return img #retorna img 
 
-        def find_biggest_contour(image):
-            # Copy
-            image = image.copy()
-            #input, gives all the contours, contour approximation compresses horizontal,
-            #vertical, and diagonal segments and leaves only their end points. For example,
-            #an up-right rectangular contour is encoded with 4 points.
-            #Optional output vector, containing information about the image topology.
-            #It has as many elements as the number of contours.
-            #we dont need it
-            contours, hierarchy = cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+        def find_biggest_contour(image): #declara la cincion find_biggest_contour con el parametro de image
+
+
+            
+            image = image.copy()# llamasmos la varible image con una funcion que es copy que pertenese ala clase de image  sin ningun paparametro
+            contours, hierarchy = cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)# declaramos una doble variable??? que llama la funcion findContours de la clase cv2 con los parametros de image, cv2.RETR_LIST es una clase llamando una funcion y cv2.CHAIN_APPROX_SIMPL es clase llamando una funcion 
 
             # Isolate largest contour
             contour_sizes = [(cv2.contourArea(contour), contour) for contour in contours]
