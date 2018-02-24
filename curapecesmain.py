@@ -172,13 +172,11 @@ if seccion == "imagen":
 
             plt.imshow(image, interpolation='nearest')# la funcion imshow pertenese ala clase plt con los parametros de image y este que aprendindo ("interpolation='nearest'")
 
-        def overlay_mask(mask, image):
-        	#make the mask rgb
-            rgb_mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2RGB)
-            #calculates the weightes sum of two arrays. in our case image arrays
-            #input, how much to weight each.
-            #optional depth value set to 0 no need
-            img = cv2.addWeighted(rgb_mask, 0.5, image, 0.5, 0)
+        def overlay_mask(mask, image):#indica que la funcion se llama overlay_mask con el parmetro mask y de image
+            rgb_mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2RGB) # declara la variable rgb_mask con la funcion cvtColor de la clase cv2 con los parametros de mask y la clase de cv2con la funcionde COLOR_GRAY2RGB
+            img = cv2.addWeighted(rgb_mask, 0.5, image, 0.5, 0) #img es una vaib #le con el valor de la funcion addWeigthted de la clase cv2  con los parametros de
+# la varible rgb_mask con otros valores de  0.5 con imagen (todavia no dice si es
+# funcion o varible)
             return img
 
         def find_biggest_contour(image):
