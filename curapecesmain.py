@@ -7,7 +7,7 @@
 #PERDONA la orrografia grcias por la compremncion
 #importamos las librerias de opencv, numpy ,flask ,etc
 #lineas sin entender bien 
-#173 ;; que significa ;  en las las funciones
+#173 ; que significa ;  en las las funciones ;;varible de multiple valores 189;
 import cv2
 import sys
 import argparse
@@ -184,10 +184,9 @@ if seccion == "imagen":
 
             
             image = image.copy()# llamasmos la varible image con una funcion que es copy que pertenese ala clase de image  sin ningun paparametro
-            contours, hierarchy = cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)# declaramos una doble variable??? que llama la funcion findContours de la clase cv2 con los parametros de image, cv2.RETR_LIST es una clase llamando una funcion y cv2.CHAIN_APPROX_SIMPL es clase llamando una funcion 
-
-            # Isolate largest contour
-            contour_sizes = [(cv2.contourArea(contour), contour) for contour in contours]
+            contours, hierarchy = cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)# declaramos una doble variable??? que llama la funcion findContours de la clase cv2 con los parametros de image, cv2.RETR_LIST es una clase llamando una funcion y cv2.CHAIN_APPROX_SIMPL es clase llamando una funcion
+            
+            contour_sizes = [(cv2.contourArea(contour), contour) for contour in contours] #countour_siszes es una varible de multiple valoreshaciendo un for para aumentar sus valores???
             biggest_contour = max(contour_sizes, key=lambda x: x[0])[1]
 
             mask = np.zeros(image.shape, np.uint8)
