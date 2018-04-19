@@ -5,27 +5,33 @@
 #cv2.rectangle ( image, upper left corner vertex, lower right corner vertex, line thickness / fill type, line type)
 #cv2.putText ( image, text, starting point of text, font type, font scale, color, linetype )
 #PERDONA la orrografia grcias por la compremncion
-#importamos las librerias de opencv, numpy ,flask ,etc
-#lineas sin entender bien
-#173
 import cv2
 import sys
 import argparse
-from matplotlib import pyplot as plt
-import numpy as np
-from math import cos, sin
 import math
 import urllib
-
+#importamos las librerias nesesarias
+import numpy as np
+#importamos las librerias nesesarias y las llamamos diferentes
+from math import cos, sin
+from math import cos, sin
 from flask import render_template
 from flask import Flask
+#importamos de las librerias nesesarias las funciones nesesarias
+from matplotlib import pyplot as plt
+#importamos de las librerias nesesarias las funciones nesesarias la llamamos diferentes
 print("camara ;; web ;; imagen ")
+#imprima las opciones
+seccion = input()
 #declaramos la varible seccion como un input
-seccion = input ()
 #si es en la input escribimos web  sale hola mundo  de flask
-if seccion =="web":
+#si escribimos camara vamamos al menu del sugmenu de camara
+if seccion == ("web"):
     print ("inicio ;; todo")
+    #imprima las opciones
+
     numero = input()
+    #declaramos la varible seccion como un input
     if numero == "todo":
         app = Flask(__name__, template_folder = 'teplates')
         @app.route('/')
@@ -42,20 +48,23 @@ if seccion =="web":
         if __name__=='__main__':
             app.run(debug = False ,port= 8000)
 
-#si escribimos camara vamamos al menu del sugmenu de camara
+
 if seccion == "camara":
 #imprimimos usted escogio camara
+#imprima las opciones
     print("usted escogio camara")
-    print ("menu ;; ich ;; prueba ;;ni idea")
+    print (" ich ;; prueba ;;ni idea")
     seleccion = input()
 #otro input para seleccionar
     if seleccion== "prueba":
 #declaramos la variable captura como video en vivo en colores
+        cap = cv2.VideoCapture(0)
         while (True):
-            captura = cv2.VideoCapture(0)
-            ret,frame = captura.read()
+            _, frame = cap.read()
             cv2.imshow("video",frame)
-            if(cv2.waitKey(1) & 0xff == ord("q")):
+            k = cv2.waitKey(1) & 0xFF
+            if k == 27:
+
 			             break
 
 #PERDONA la orrografia grcias por la comprencion
@@ -128,40 +137,7 @@ if seccion == "camara":
             camera.release()
             cv2.destroyAllWindows()
 
-    if seleccion == "ni idea":
-        cap = cv2.VideoCapture(0)
-        while(1):
 
-#PERDONA la orrografia grcias por la compremncion
-
-
-
-                #_, frame = cap.read()
-                #hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
-                #lower_white = np.array([0,0,0], dtype=np.uint8)
-                #upper_white = np.array([255,37,255], dtype=np.uint8)
-
-                #mask = cv2.inRange(hsv, lower_white, upper_white)
-                # Bitwise-AND mask and original image
-                #res = cv2.bitwise_and(frame,frame, mask= mask)
-
-            _, frame = cap.read()
-            hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HS)
-            lower_white = np.array([0,0,0], dtype=np.uint8)
-            upper_white = np.array([255,37,255], dtype=np.uint8)
-            mask = cv2.inRange(hsv, lower_white, upper_white)
-            res = cv2.bitwise_and(frame,frame, mask= mask)
-
-            cv2.imshow('frame',frame)
-            cv2.imshow('mask',mask)
-            cv2.imshow('res',res)
-
-            k = cv2.waitKey(5) & 0xFF
-            if k == 27:
-                break
-
-                cv2.destroyAllWindows()
 if seccion == "imagen":
         print ("usted escogio imagen")
 
