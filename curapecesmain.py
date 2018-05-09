@@ -39,7 +39,7 @@ if seccion == ("web"):
     if seleccion  == "todo":
         @app.route('/')
         def index():
-            return render_template('index.html')
+            return render_template('curarpeces.html')
 
         def gen():
             i=1
@@ -73,16 +73,16 @@ if seccion == ("web"):
         return Response(get_frame(),mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-    if __name__ == '__main__':
+        if __name__ == '__main__':
             app.run(host='localhost', debug=True, threaded=True)
 
 
     if seleccion == "inicio":
         @app.route('/')
         def index ():
-            return render_template('index.html')
+            return render_template('acercadelproyecto.html')
         if __name__=='__main__':
-            app.run(debug = False ,port= 8000)
+            app.run(host='localhost', debug=True, threaded=True)
 
 
 if seccion == "camara":
@@ -272,10 +272,21 @@ if seccion == "contar":
         ok, frame = video.read()
 
         # Grayscale footage
-        gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+        grayi = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
         # Blur footage to prevent artifacts
-        gray = cv2.GaussianBlur(gray,(21,21),0)
-
+        grayii = cv2.GaussianBlur(gray,(21,21),0)
+        blancobajo= np.array([0,140,120] ,)#[0,140,120]
+        blancoalto = np.array([255,220,255], )#[255,220,255]
+        blancoperfectA  = np.array(255)#este esta en escala de grises
+        blancoperfectB  = np.array(205)#este esta en escala de grises
+        v = cv2.getStructuringElement(cv2.MORPH_ELLIPSE ,(15,15))
+        mascara = cv2.inRange(grayii,blancoperfectA,blancoperfectB)
+        mascara_tapada = cv2.morphologyEx(mascara,cv2.MORPH_CLOSE,v)
+        numerodeblancos1 = np.sum(mascara_tapada)
+        if numerodeblancos1 < 0:
+            print (' imagen 1 tiene',numerodeblancos1,'peces')
+        else:
+            print ('no hay peces con el color')
         # Check for background
         if back is None:
             # Set background to current frame
@@ -323,7 +334,6 @@ if seccion == "contar":
         if status == 'tracking':
             # Update our tracker
             ok, bbox = tracker.update(frame)
-            ok, bbox = tracker.update(mascara_tapada)
             # Create a visible rectangle for our viewing pleasure
             if ok:
                 p1 = (int(bbox[0]), int(bbox[1]))
@@ -333,7 +343,7 @@ if seccion == "contar":
 
         # Show our webcam
         cv2.imshow("Camera",frame)
-        cv2.imshow("Camera2",mascara_tapada)
+
 
         # If we have been tracking for more than a few seconds
         if idle_time >= 30:
@@ -354,17 +364,7 @@ if seccion == "contar":
         # Incriment timer
         idle_time += 1
 
-blancobajo= np.array([0,140,120] ,)#[0,140,120]
-blancoalto = np.array([255,220,255], )#[255,220,255]
-blancoperfect  = np.array(255)#este esta en escala de grises
-mascara = cv2.inRange(gray,blancobajo,blancoalto)
-mascara_tapada = cv2.morphologyEx(mascara,cv2.MORPH_CLOSE,v1)
-blancoperfect  = np.array(255)
-numerodeblancos1 = np.sum(mascara_tapada == blancoperfect)
-if numerodeblancos1 < 0:
-    print (' imagen 1 tiene',numerodeblancos1,'peces')
-else:
-    print ('no hay peces con el color')
+
 # Check if we've quit
     if cv2.waitKey(1) & 0xFF == ord("q") or cv2.getWindowProperty('Camera',0) == -1:
 
