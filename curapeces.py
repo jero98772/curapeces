@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-import cv2
 import sys
 import zipfile
 import tarfile
@@ -15,7 +14,7 @@ from tensorflow.python.keras.layers import  Convolution2D, MaxPooling2D
 from tensorflow.python.keras import backend as K
 #librerias
 
-pez = ["fish.jpg","ich.jpg","ich4.jpg"]#cualquir imagen  de un pez
+#cualquir imagen  de un pez
 #varibles globales
 
 K.clear_session()
@@ -43,8 +42,6 @@ entrenamiento_datagen = ImageDataGenerator(
     shear_range=0.2,
     zoom_range=0.2,
     horizontal_flip=True)
-
-test_datagen = ImageDataGenerator(rescale=1. / 255)
 
 entrenamiento_generador = entrenamiento_datagen.flow_from_directory(
     especimendepractica,
