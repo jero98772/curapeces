@@ -35,13 +35,13 @@ pulido=(2,2)
 numerodenfermedades=3# cambiar mientras encuenbtro imagenes y la sano cuenta como enfermedad
 lr = 0.0004
 
-
+#pre prosesamos las imagenes
 
 entrenamiento_datagen = ImageDataGenerator(
-    rescale=1. / 255,
-    shear_range=0.2,
-    zoom_range=0.2,
-    horizontal_flip=True)
+    rescale=1. / 255,# esta es para que mire de  un pez que haveces no va estar complota la fotografia
+    shear_range=0.2,# cundo la imgen esta voltiada por el pez subio bajo pero en 2 dimenciones
+    zoom_range=0.2,#para que amplie la imagen 
+    horizontal_flip=True)#para que invierata la imagem 
 
 entrenamiento_generador = entrenamiento_datagen.flow_from_directory(
     especimendepractica,
