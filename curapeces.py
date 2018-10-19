@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import tensorflow as tf
+import cv2
 import sys
 import zipfile
 import tarfile
@@ -14,7 +15,7 @@ from tensorflow.python.keras.layers import  Convolution2D, MaxPooling2D
 from tensorflow.python.keras import backend as K
 #librerias
 
-#cualquir imagen  de un pez
+
 #varibles globales
 
 K.clear_session()
@@ -25,23 +26,29 @@ pruebas = 2
 alturadelaimagen =150
 longituddelaimagen= 150
 numerodeimagenesamandar=32
-pasos=390#numero de veces que se va aprosesar la informacion
-validacon=70
+pasos=700#numero de veces que se va aprosesar la informacion
+validacon=177
 filtroprimeravez= 32
 filtrosegundavez= 64
+filtroterceravez= 96
+filtrocurtavez =128
 filtrouno=(3,3)
 filtrodos=(2,2)
+filtrotres=(3,2)
+filtrocutro=(2,3)
 pulido=(2,2)
 numerodenfermedades=3# cambiar mientras encuenbtro imagenes y la sano cuenta como enfermedad
-lr = 0.0004
+lr = 0.00004
 
-#pre prosesamos las imagenes
+
 
 entrenamiento_datagen = ImageDataGenerator(
-    rescale=1. / 255,# esta es para que mire de  un pez que haveces no va estar complota la fotografia
-    shear_range=0.2,# cundo la imgen esta voltiada por el pez subio bajo pero en 2 dimenciones
-    zoom_range=0.2,#para que amplie la imagen 
-    horizontal_flip=True)#para que invierata la imagem 
+    rescale=1. / 255,
+    shear_range=0.2,
+    zoom_range=0.2,
+    horizontal_flip=True)
+
+test_datagen = ImageDataGenerator(rescale=1. / 255)
 
 entrenamiento_generador = entrenamiento_datagen.flow_from_directory(
     especimendepractica,
@@ -60,6 +67,12 @@ cnn.add(Convolution2D(filtroprimeravez, filtrouno, padding ="same", input_shape=
 cnn.add(MaxPooling2D(pool_size=pulido))
 
 cnn.add(Convolution2D(filtrosegundavez, filtrodos, padding ="same"))
+cnn.add(MaxPooling2D(pool_size=pulido))
+
+cnn.add(Convolution2D(filtroterceravez, filtrotres, padding ="same"))
+cnn.add(MaxPooling2D(pool_size=pulido))
+
+cnn.add(Convolution2D(filtrocurtavez, filtrocutro, padding ="same"))
 cnn.add(MaxPooling2D(pool_size=pulido))
 
 cnn.add(Flatten())
