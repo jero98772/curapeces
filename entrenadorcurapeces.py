@@ -7,6 +7,7 @@ import zipfile
 import tarfile
 import sys
 import os
+import math
 from tensorflow.python.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.python.keras import optimizers
 from tensorflow.python.keras.models import Sequential
@@ -32,8 +33,8 @@ pruebas = 1
 alturadelaimagen =150
 longituddelaimagen= 150
 numerodeimagenesamandar=64
-pasos=500#numero de veces que se va aprosesar la informacion
-validacion=183
+veces =500#numero de veces que se va aprosesar la informacion
+validacion= veces/math.e
 filtroprimeravez= 32
 filtrosegundavez= 64
 filtroterceravez= 32
@@ -101,7 +102,7 @@ cnn.compile(loss='categorical_crossentropy',
 
 cnn.fit_generator(
     entrenamiento_generador,
-    steps_per_epoch=pasos,
+    steps_per_epoch=veces,
     epochs=pruebas,
     validation_data=validacion_generador,
     validation_steps=validacion)
