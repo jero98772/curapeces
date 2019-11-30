@@ -123,7 +123,7 @@ class curapeces():
 #cuda.memcpy_htod(curapecs, curapecs())
 #curapeces()
 class predict():
-    pez="./para_ensallar/"+input()
+    pez="./test_fish/"+input("chose a image and put file extision ... png jpg\n")
     imagenpez = cv2.imread(pez, cv2.IMREAD_COLOR)
     numfolders=len(os.listdir("modelos_de_inteligencia_artificial_variedad"))-1
     modelfolder="./modelos_de_inteligencia_artificial_variedad/curapeces"+str(numfolders)+"__models curapeces__2019-11-29"
@@ -191,10 +191,10 @@ class predict():
       return self.answer
 
         
-#curapeces=curapeces()
+curapeces=curapeces()
 #curapeces.image()
 #curapeces.save_nn()
 predict=predict()
-print(predict.model)
 predict.display_image()
 print(predict.predict())
+#print(predict.model)
