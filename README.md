@@ -96,7 +96,7 @@ si te sale error 13 puedes intentar ejecutarlo asi
 
 	sudo python3 -m pip install opencv-python numpy  tensorflow keras
 
-#como usarlo
+# como usarlo
 con todo instalado y funcionado puedes correr en python 3 el comando 
 
 	python3 curapeces.py
