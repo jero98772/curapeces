@@ -63,10 +63,6 @@ if you have problems with tensorflow try install tensorflow == 1.4
 
 
 i use a  [ordenador](https://github.com/jero98772/ordenador) for organize the AI output models of this AI
-#### contribute
-donation
-	
-	-  Bitcoin: tb1qgt4trnnsxdmfcpnydkmk8ht0y4esg4cdvzmhaz
 
 ## español
 
@@ -133,9 +129,3 @@ si tienes problemas con tensorflow al ejeculatlo prueba instalar  tensorflow == 
     python3 -m pip install tensorflow == 1.4.0
 
 yo uso una version de [ordenador](https://github.com/jero98772/ordenador) para organisar los modelos que  de IA porducios
-
-#### contribuye 
-donando 
-
-	
-	-  Bitcoin: bc1qf3eh6ssgzw2t3qyjk2gzwuskq4ctfk8375fg3r
