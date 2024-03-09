@@ -6,9 +6,9 @@ import zipfile
 import tarfile
 import os
 #import pycuda.driver as cuda
-#import pycuda.autoinit
-#from pycuda.compiler import SourceModule
-from tensorflow.python.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.python.distribute import input_lib
+
 from tensorflow.python.keras import optimizers
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Dropout, Flatten, Dense, Activation
@@ -16,6 +16,7 @@ from tensorflow.python.keras.layers import  Convolution2D, MaxPooling2D
 from keras.preprocessing.image import load_img, img_to_array
 from keras.models import load_model
 from tensorflow.python.keras import backend as K
+
 #from numba import cuda
 #import numba
 import orendador
@@ -82,12 +83,12 @@ class curapeces():
             class_mode='categorical')
     def nn(self):
     
-        nn = Sequential()
-        nn.add(Convolution2D(self.filtroprimeravez, self.filtrouno, padding ="same", input_shape=(self.longituddelaimagen, self.alturadelaimagen , 3), activation='relu'))
-        nn.add(MaxPooling2D(pool_size=self.pulido))
+        self.nn = Sequential()
+        self.nn.add(Convolution2D(self.filtroprimeravez, self.filtrouno, padding ="same", input_shape=(self.longituddelaimagen, self.alturadelaimagen , 3), activation='relu'))
+        self.nn.add(MaxPooling2D(pool_size=self.pulido))
 
-        nn.add(Convolution2D(self.filtrosegundavez, self.filtrodos, padding ="same"))
-        nn.add(MaxPooling2D(pool_size=self.pulido))
+        self.nn.add(Convolution2D(self.filtrosegundavez, self.filtrodos, padding ="same"))
+        self.nn.add(MaxPooling2D(pool_size=self.pulido))
 
         # nn.add(Convolution2D(self.filtroterceravez, self.filtrotres, padding ="same"))
         # nn.add(MaxPooling2D(pool_size=self.pulido))
@@ -98,17 +99,16 @@ class curapeces():
         # nn.add(Convolution2D(filtroquintavez, filtroquinto, padding ="same"))
         # nn.add(MaxPooling2D(pool_size=pulido))
 
-        nn.add(Flatten())
-        nn.add(Dense(512, activation='relu'))
-        nn.add(Dropout(0.5))
-        nn.add(Dense(self.numerodenfermedades, activation='softmax'))
-        nn.compile(optimizer='sgd', loss='mse')
+        self.nn.add(Flatten())
+        self.nn.add(Dense(512, activation='relu'))
+        self.nn.add(Dropout(0.5))
+        self.nn.add(Dense(self.numerodenfermedades, activation='softmax'))
+        self.nn.compile(optimizer='sgd', loss='mse')
         #cnn.compile(loss='categorical_crossentropy',optimizer=optimizers.Adam(lr=lr),metrics=['accuracy'])
+        self.nn.fit_generator(self.entrenamiento_generador ,validation_data=self.validacion_generador, steps_per_epoch=self.pasos,epochs=self.pruebas)
+        #self.nn.fit_generator(self.entrenamiento_generador,steps_per_epoch=self.pasos,epochs=self.pruebas,validation_data=self.validacion_generador,validation_steps=self.validacon)
 
 
-
-
-        nn.fit_generator(self.entrenamiento_generador,steps_per_epoch=self.pasos,epochs=self.pruebas,validation_data=self.validacion_generador,validation_steps=self.validacon)
         #cnn.save('./modelo_lab_experimental/modelo_pezenfermo.h5')
         #cnn.save_weights('./modelo_lab_experimental/pesospezenfermo.h5')
         return nn
@@ -122,8 +122,12 @@ class curapeces():
 #cuarpeces = cuda.mem_alloc(curapecs())
 #cuda.memcpy_htod(curapecs, curapecs())
 #curapeces()
+
+curapeces=curapeces()
+curapeces.image()
+curapeces.save_nn()
 class predict():
-    pez="./test_fish/"+input("chose a image and put file extision ... png jpg\n")
+    pez=""#"./test_fish/"+input("chose a image and put file extision ... png jpg\n")
     imagenpez = cv2.imread(pez, cv2.IMREAD_COLOR)
     numfolders=len(os.listdir("modelos_de_inteligencia_artificial_variedad"))-1
     modelfolder="./modelos_de_inteligencia_artificial_variedad/curapeces"+str(numfolders)+"__models curapeces__2019-11-29"
@@ -191,10 +195,10 @@ class predict():
       return self.answer
 
         
-curapeces=curapeces()
-#curapeces.image()
-#curapeces.save_nn()
-predict=predict()
-predict.display_image()
-print(predict.predict())
+
+"""
+#predict=predict()
+#predict.display_image()
+#print(predict.predict())
 #print(predict.model)
+"""
